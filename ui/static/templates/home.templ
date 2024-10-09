@@ -1,0 +1,38 @@
+package templates
+
+import (
+    layout "snippetbox/ui/static/templates/layout"
+    "snippetbox/interal/models"
+    "strconv"
+	"fmt"
+)
+
+templ Home(snippets []*models.Snippet){
+    @layout.Page("Home"){
+        <div class="container mx-auto px-3 my-5">
+            <h1 class="special_title font-bold text-3xl">Latest snippets</h1>
+            <div class="mt-5 overflow-hidden rounded-lg border border-gray-200">
+                <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-4 font-semibold text-gray-900">Title</th>
+                            <th scope="col" class="px-6 py-4 font-semibold text-gray-900">Created at</th>
+                            <th scope="col" class="px-6 py-4 font-semibold text-gray-900">ID</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100 border-t border-gray-100">
+                        for _, snippet := range snippets {
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4"><a href={templ.URL(fmt.Sprintf("/snippet/view?id=%d", snippet.ID))} class="rounded-md text-cyan-600 font-semibold underline">{snippet.Title}</a></td>
+                                <td class="px-6 py-4">{snippet.CreatedAt.Format("2006-01-02 15:04")}</td>
+                                <td class="px-6 py-4">#{strconv.FormatInt(int64(snippet.ID), 10)}</td>
+                                <td></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+}
