@@ -57,7 +57,7 @@ func Home(snippets []*models.Snippet) templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				var templ_7745c5c3_Var3 templ.SafeURL = templ.URL(fmt.Sprintf("/snippet/view?id=%d", snippet.ID))
+				var templ_7745c5c3_Var3 templ.SafeURL = templ.URL(fmt.Sprintf("/snippet/view/%d", snippet.ID))
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(string(templ_7745c5c3_Var3)))
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
@@ -69,7 +69,7 @@ func Home(snippets []*models.Snippet) templ.Component {
 				var templ_7745c5c3_Var4 string
 				templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(snippet.Title)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/static/templates/home.templ`, Line: 27, Col: 193}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/static/templates/home.templ`, Line: 27, Col: 190}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 				if templ_7745c5c3_Err != nil {
