@@ -15,14 +15,12 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 		app.notFound(w)
 		return
 	}
+
 	snippets, err := app.snippets.Latest()
 	if err != nil {
 		app.serverError(w, err)
 		return
 	}
-	// for _, snippet := range snippets {
-	// 	fmt.Fprintf(w, "%+v\n", snippet)
-	// }
 
 	component := templates.Home(snippets)
 	component.Render(context.Background(), w)
