@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 )
 
@@ -20,6 +21,21 @@ func SecureHeaders(next http.Handler) http.Handler {
 func (app *application) LogRequest(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
 		app.infoLog.Printf("%s - %s %s %s", req.RemoteAddr, req.Proto, req.Method, req.URL.RequestURI())
+
+		next.ServeHTTP(w, req)
+	})
+}
+
+func (app *application) RecoverPanics(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
+
+		defer func() {
+			if err := recover(); err != nil {
+				w.Header().Set("Connection", "close")
+
+				app.serverError(w, fmt.Errorf("%s", err))
+			}
+		}()
 
 		next.ServeHTTP(w, req)
 	})

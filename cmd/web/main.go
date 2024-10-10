@@ -28,9 +28,9 @@ func main() {
 	httpAddress := os.Getenv("HTTP_ADDRESS")
 	dsn := os.Getenv("DSN")
 
-	infoLog := log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)
+	infoLog := log.New(os.Stdout, "\033[34mINFO\033[0m\t", log.Ldate|log.Ltime)
 
-	errorLog := log.New(os.Stderr, "ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
+	errorLog := log.New(os.Stderr, "\033[91mERROR\033[0m\t", log.Ldate|log.Ltime|log.Lshortfile)
 
 	db, dbErr := openDB(dsn)
 	if dbErr != nil {
