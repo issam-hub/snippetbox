@@ -24,7 +24,7 @@ templ Home(snippets []*models.Snippet){
                     <tbody class="divide-y divide-gray-100 border-t border-gray-100">
                         for _, snippet := range snippets {
                             <tr class="hover:bg-gray-50">
-                                <td class="px-6 py-4"><a href={templ.URL(fmt.Sprintf("/snippet/view?id=%d", snippet.ID))} class="rounded-md text-cyan-600 font-semibold underline">{snippet.Title}</a></td>
+                                <td class="px-6 py-4"><a href={templ.URL(fmt.Sprintf("/snippet/view/%d", snippet.ID))} class="rounded-md text-cyan-600 font-semibold underline">{snippet.Title}</a></td>
                                 <td class="px-6 py-4">{snippet.CreatedAt.Format("2006-01-02 15:04")}</td>
                                 <td class="px-6 py-4">#{strconv.FormatInt(int64(snippet.ID), 10)}</td>
                                 <td></td>
