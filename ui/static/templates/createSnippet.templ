@@ -1,0 +1,51 @@
+package templates
+
+import (
+    layout "snippetbox/ui/static/templates/layout"
+	"snippetbox/interal/forms"
+)
+
+templ CreateSnippet(form forms.SnippetCreateForm){
+    @layout.Page("Create"){
+        <div class="container mx-auto px-3 my-5">
+            <h1 class="special_title font-bold text-3xl text-center">Create a snippet</h1>
+            <form action="/snippet/create" method="post" class="mt-10 max-w-screen-lg mx-auto space-y-5">
+                <div class="flex flex-col">
+                    <label for="" class="mb-2 font-semibold">Title:</label>
+                    <input type="text" class="border border-slate-200 rounded-md p-3" name="title" value={form.Title}>
+                    if errorMsg, ok := form.Validator.FieldErrors["title"]; ok{
+                        <p class="text-sm text-red-500">* {errorMsg}</p>
+                    }
+                </div>
+                <div class="flex flex-col">
+                    <label for="" class="mb-2 font-semibold">Content:</label>
+                    <textarea name="content" class="p-3 resize-none border border-slate-200 rounded-md h-56 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-slate-200 [&::-webkit-scrollbar-thumb]:bg-slate-300 [&::-webkit-scrollbar-thumb]:rounded-lg" name="" id="">{form.Content}</textarea>
+                    if errorMsg, ok := form.Validator.FieldErrors["content"]; ok{
+                        <p class="text-sm text-red-500">* {errorMsg}</p>
+                    }
+                </div>
+                <div class="flex">
+                    <label for="" class="mr-6 font-semibold">Delete in:</label>
+                    <div class="flex space-x-3">
+                        <div>
+                            <input type="radio" name="expires" id="" value="365" checked?={form.Expires == 365}>
+                            <label for="" class="font-semibold">One Year</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="expires" id="" value="7" checked?={form.Expires == 7}>
+                            <label for="" class="font-semibold">One Week</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="expires" id="" value="1" checked?={form.Expires == 1}>
+                            <label for="" class="font-semibold">One Day</label>
+                        </div>
+                    </div>
+                    if errorMsg, ok := form.Validator.FieldErrors["expires"]; ok{
+                        <p class="text-sm text-red-500">* {errorMsg}</p>
+                    }
+                </div>
+                <input type="submit" value="Publish" class="py-3 px-4 bg-cyan-300 rounded-md text-white font-semibold cursor-pointer">
+            </form>
+        </div>
+    }
+}
