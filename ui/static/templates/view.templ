@@ -4,9 +4,16 @@ import (
     layout "snippetbox/ui/static/templates/layout"
     models "snippetbox/interal/models"
 )
+var helloHandle = templ.NewOnceHandle()
 
-templ View(snippet models.Snippet){
+templ View(snippet models.Snippet, flash string){
+    @helloHandle.Once(){
+        <script src="/static/javascript/code.js" defer></script>
+    }
     @layout.Page("Snippet View") {
+        if flash != "" {
+            <h1 class="flesh absolute top-24 left-1/2 -translate-x-1/2 p-4 rounded-md bg-[#6ed795d0] text-green-700 flex items-center">snippet successfully created! <img src="/static/images/close.svg" alt="close" class="h-4 w-4 ml-4 cursor-pointer" ></h1>
+        }
         <article class="border border-slate-100 shadow-md rounded-lg w-fit mx-auto p-6 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-full">
             <h1 class="special_title text-3xl font-bold mb-3">{snippet.Title}</h1>
             <p class="text-slate-500 text-sm"><span class="italic">Created at:</span> {snippet.CreatedAt.Format("2006-01-02 15:04")} - <span class="italic">Expires at:</span> {snippet.Expires.Format("2006-01-02 15:04")}</p>
