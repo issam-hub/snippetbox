@@ -1,5 +1,9 @@
 package templates
 
+import (
+    "snippetbox/interal/models"
+)
+
 templ Page(name string) {
     <!DOCTYPE html>
     <html lang="en">
@@ -19,10 +23,15 @@ templ Page(name string) {
         <header class="py-5 bg-cyan-100">
             <div class="container mx-auto px-3 flex justify-between items-center">
                 <h1 class="special_title text-5xl"><a href="/">Snippetbox</a></h1>
-                <nav class="flex justify-between items-center w-[300px]">
+                <nav class="flex justify-between items-center w-[400px]">
                     <a href="/" class="special_title text-yellow-500">Home</a>
-                    <a href="/snippet/create" class="special_title text-yellow-500">Create</a>
-                    <a href="#" class="special_title text-yellow-500">About</a>
+                    if ctx.Value(models.ContextClass).(bool) {
+                        <a href="/snippet/create" class="special_title text-yellow-500">Create</a>
+                        <form action="/logout" method="post" class="contents"><button class="special_title text-yellow-500">Logout</button></form>
+                    } else {
+                        <a href="/signup" class="special_title text-yellow-500">Signup</a>
+                        <a href="/login" class="special_title text-yellow-500">Login</a>
+                    }
                 </nav>
             </div>
         </header>

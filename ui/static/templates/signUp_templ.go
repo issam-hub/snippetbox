@@ -13,7 +13,7 @@ import (
 	layout "snippetbox/ui/static/templates/layout"
 )
 
-func CreateSnippet(form forms.SnippetCreateForm) templ.Component {
+func SignUp(form forms.UserSignupForm) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -46,14 +46,14 @@ func CreateSnippet(form forms.SnippetCreateForm) templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"container mx-auto px-3 my-5\"><h1 class=\"special_title font-bold text-3xl text-center\">Create a snippet</h1><form action=\"/snippet/create\" method=\"post\" class=\"mt-10 max-w-screen-lg mx-auto space-y-5\"><div class=\"flex flex-col\"><label for=\"\" class=\"mb-2 font-semibold\">Title:</label> <input type=\"text\" class=\"border border-slate-200 rounded-md p-3\" name=\"title\" value=\"")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"container mx-auto px-3 my-5\"><h1 class=\"special_title font-bold text-3xl text-center\">Create an account</h1><form action=\"/signup\" method=\"post\" class=\"mt-10 max-w-screen-lg mx-auto space-y-5\"><div class=\"flex flex-col\"><label for=\"\" class=\"mb-2 font-semibold\">Name:</label> <input type=\"text\" class=\"border border-slate-200 rounded-md p-3\" name=\"name\" value=\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var3 string
-			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(form.Title)
+			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(form.Name)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/static/templates/createSnippet.templ`, Line: 15, Col: 116}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/static/templates/signUp.templ`, Line: 15, Col: 114}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 			if templ_7745c5c3_Err != nil {
@@ -63,7 +63,7 @@ func CreateSnippet(form forms.SnippetCreateForm) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			if errorMsg, ok := form.Validator.FieldErrors["title"]; ok {
+			if errorMsg, ok := form.Validator.FieldErrors["name"]; ok {
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<p class=\"text-sm text-red-500\">* ")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
@@ -71,7 +71,7 @@ func CreateSnippet(form forms.SnippetCreateForm) templ.Component {
 				var templ_7745c5c3_Var4 string
 				templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(errorMsg)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/static/templates/createSnippet.templ`, Line: 17, Col: 67}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/static/templates/signUp.templ`, Line: 17, Col: 67}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 				if templ_7745c5c3_Err != nil {
@@ -82,24 +82,24 @@ func CreateSnippet(form forms.SnippetCreateForm) templ.Component {
 					return templ_7745c5c3_Err
 				}
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div><div class=\"flex flex-col\"><label for=\"\" class=\"mb-2 font-semibold\">Content:</label> <textarea name=\"content\" class=\"p-3 resize-none border border-slate-200 rounded-md h-56 [&amp;::-webkit-scrollbar]:w-2 [&amp;::-webkit-scrollbar-track]:bg-slate-200 [&amp;::-webkit-scrollbar-thumb]:bg-slate-300 [&amp;::-webkit-scrollbar-thumb]:rounded-lg\" name=\"\" id=\"\">")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div><div class=\"flex flex-col\"><label for=\"\" class=\"mb-2 font-semibold\">Email:</label> <input type=\"email\" class=\"border border-slate-200 rounded-md p-3\" name=\"email\" value=\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var5 string
-			templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(form.Content)
+			templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(form.Email)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/static/templates/createSnippet.templ`, Line: 22, Col: 287}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/static/templates/signUp.templ`, Line: 22, Col: 117}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</textarea> ")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\"> ")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			if errorMsg, ok := form.Validator.FieldErrors["content"]; ok {
+			if errorMsg, ok := form.Validator.FieldErrors["email"]; ok {
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<p class=\"text-sm text-red-500\">* ")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
@@ -107,7 +107,7 @@ func CreateSnippet(form forms.SnippetCreateForm) templ.Component {
 				var templ_7745c5c3_Var6 string
 				templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(errorMsg)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/static/templates/createSnippet.templ`, Line: 24, Col: 67}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/static/templates/signUp.templ`, Line: 24, Col: 67}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 				if templ_7745c5c3_Err != nil {
@@ -118,41 +118,11 @@ func CreateSnippet(form forms.SnippetCreateForm) templ.Component {
 					return templ_7745c5c3_Err
 				}
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div><div class=\"flex\"><label for=\"\" class=\"mr-6 font-semibold\">Delete in:</label><div class=\"flex space-x-3\"><div><input type=\"radio\" name=\"expires\" id=\"\" value=\"365\"")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div><div class=\"flex flex-col\"><label for=\"\" class=\"mb-2 font-semibold\">Password:</label> <input type=\"password\" class=\"border border-slate-200 rounded-md p-3\" name=\"password\"> ")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			if form.Expires == 365 {
-				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" checked")
-				if templ_7745c5c3_Err != nil {
-					return templ_7745c5c3_Err
-				}
-			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("> <label for=\"\" class=\"font-semibold\">One Year</label></div><div><input type=\"radio\" name=\"expires\" id=\"\" value=\"7\"")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			if form.Expires == 7 {
-				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" checked")
-				if templ_7745c5c3_Err != nil {
-					return templ_7745c5c3_Err
-				}
-			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("> <label for=\"\" class=\"font-semibold\">One Week</label></div><div><input type=\"radio\" name=\"expires\" id=\"\" value=\"1\"")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			if form.Expires == 1 {
-				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" checked")
-				if templ_7745c5c3_Err != nil {
-					return templ_7745c5c3_Err
-				}
-			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("> <label for=\"\" class=\"font-semibold\">One Day</label></div></div>")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			if errorMsg, ok := form.Validator.FieldErrors["expires"]; ok {
+			if errorMsg, ok := form.Validator.FieldErrors["password"]; ok {
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<p class=\"text-sm text-red-500\">* ")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
@@ -160,7 +130,7 @@ func CreateSnippet(form forms.SnippetCreateForm) templ.Component {
 				var templ_7745c5c3_Var7 string
 				templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(errorMsg)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/static/templates/createSnippet.templ`, Line: 44, Col: 67}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/static/templates/signUp.templ`, Line: 31, Col: 67}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 				if templ_7745c5c3_Err != nil {
@@ -171,13 +141,13 @@ func CreateSnippet(form forms.SnippetCreateForm) templ.Component {
 					return templ_7745c5c3_Err
 				}
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div><input type=\"submit\" value=\"Publish\" class=\"py-3 px-4 bg-cyan-300 rounded-md text-white font-semibold cursor-pointer\"></form></div>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div><input type=\"submit\" value=\"Sign up\" class=\"py-3 px-4 bg-cyan-300 rounded-md text-white font-semibold cursor-pointer\"></form></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			return templ_7745c5c3_Err
 		})
-		templ_7745c5c3_Err = layout.Page("Create").Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = layout.Page("Signup").Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

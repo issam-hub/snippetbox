@@ -1,7 +1,0 @@
-<div class=\"container mx-auto px-3 my-5\"><h1 class=\"special_title font-bold text-3xl\">Latest snippets</h1><div class=\"mt-5 overflow-hidden rounded-lg border border-gray-200\"><table class=\"w-full border-collapse bg-white text-left text-sm text-gray-500\"><thead class=\"bg-gray-50\"><tr><th scope=\"col\" class=\"px-6 py-4 font-semibold text-gray-900\">Title</th><th scope=\"col\" class=\"px-6 py-4 font-semibold text-gray-900\">Created at</th><th scope=\"col\" class=\"px-6 py-4 font-semibold text-gray-900\">ID</th><th></th></tr></thead> <tbody class=\"divide-y divide-gray-100 border-t border-gray-100\">
-<tr class=\"hover:bg-gray-50\"><td class=\"px-6 py-4\"><a href=\"
-\" class=\"rounded-md text-cyan-600 font-semibold underline\">
-</a></td><td class=\"px-6 py-4\">
-</td><td class=\"px-6 py-4\">#
-</td><td></td></tr>
-</tbody></table></div></div>
