@@ -103,3 +103,120 @@ func (app *application) snippetCreatePost(w http.ResponseWriter, r *http.Request
 
 	http.Redirect(w, r, fmt.Sprintf("/snippet/view/%d", id), http.StatusSeeOther)
 }
+
+func (app *application) signUp(w http.ResponseWriter, r *http.Request) {
+	form := forms.UserSignupForm{}
+	component := templates.SignUp(form)
+	component.Render(r.Context(), w)
+}
+
+func (app *application) signUpPost(w http.ResponseWriter, r *http.Request) {
+	err := r.ParseForm()
+	if err != nil {
+		app.clientError(w, http.StatusBadRequest)
+		return
+	}
+
+	form := forms.UserSignupForm{
+		Name:           r.PostForm.Get("name"),
+		Email:          r.PostForm.Get("email"),
+		HashedPassword: r.PostForm.Get("password"),
+	}
+
+	form.CheckField(validator.NotBlank(form.Name), "name", "Name should cannot be blank")
+	form.CheckField(validator.NotBlank(form.Email), "email", "Email should cannot be blank")
+	form.CheckField(validator.NotBlank(form.HashedPassword), "password", "Password should cannot be blank")
+
+	form.CheckField(validator.MinChars(form.HashedPassword, 8), "password", "Password must be at least 8 characters long")
+
+	form.CheckField(validator.Matches(form.Email, validator.EmailRegEx), "email", "Email must be valid")
+
+	if !form.Valid() {
+		component := templates.SignUp(form)
+		component.Render(r.Context(), w)
+		return
+	}
+
+	err = app.users.Insert(form.Name, form.Email, form.HashedPassword)
+	if err != nil {
+		if errors.Is(err, models.ErrDuplicateEmail) {
+			form.AddFieldError("email", "Email address already exists")
+
+			component := templates.SignUp(form)
+			component.Render(r.Context(), w)
+		} else {
+			app.serverError(w, err)
+		}
+		return
+	}
+	app.sessionManager.Put(r.Context(), "flash", "Your sign up was successfull. Please log in.")
+
+	http.Redirect(w, r, "/login", http.StatusSeeOther)
+}
+
+func (app *application) userLogin(w http.ResponseWriter, r *http.Request) {
+	form := forms.UserLoginForm{}
+	component := templates.Login(form)
+	component.Render(r.Context(), w)
+}
+
+func (app *application) userLoginPost(w http.ResponseWriter, r *http.Request) {
+	err := r.ParseForm()
+	if err != nil {
+		app.clientError(w, http.StatusBadRequest)
+		return
+	}
+	form := forms.UserLoginForm{
+		Email:          r.PostForm.Get("email"),
+		HashedPassword: r.PostForm.Get("password"),
+	}
+
+	form.CheckField(validator.NotBlank(form.Email), "email", "Email should cannot be blank")
+	form.CheckField(validator.Matches(form.Email, validator.EmailRegEx), "email", "Email must be valid")
+
+	form.CheckField(validator.NotBlank(form.HashedPassword), "password", "Password should cannot be blank")
+
+	if !form.Valid() {
+		component := templates.Login(form)
+		component.Render(r.Context(), w)
+		return
+	}
+
+	id, err := app.users.Authenticate(form.Email, form.HashedPassword)
+	if err != nil {
+		if errors.Is(err, models.ErrInvalidCredentials) {
+			form.AddNonFieldError("Your email address or password is incorrect")
+
+			component := templates.Login(form)
+			component.Render(r.Context(), w)
+		} else {
+			app.serverError(w, err)
+		}
+		return
+	}
+
+	err = app.sessionManager.RenewToken(r.Context())
+	if err != nil {
+		app.serverError(w, err)
+		return
+	}
+
+	app.sessionManager.Put(r.Context(), "authenticatedUserID", id)
+
+	http.Redirect(w, r, "/snippet/create", http.StatusSeeOther)
+
+}
+
+func (app *application) userLogoutPost(w http.ResponseWriter, r *http.Request) {
+	err := app.sessionManager.RenewToken(r.Context())
+	if err != nil {
+		app.serverError(w, err)
+		return
+	}
+
+	app.sessionManager.Remove(r.Context(), "authenticatedUserID")
+
+	app.sessionManager.Put(r.Context(), "flash", "You've been logged out succussfully!")
+
+	http.Redirect(w, r, "/", http.StatusSeeOther)
+}

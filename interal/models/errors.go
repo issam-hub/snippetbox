@@ -4,4 +4,8 @@ import "errors"
 
 var ErrNoRecord = errors.New("models: no matching record found")
 
-var FieldErrors = make(map[string]string)
+var ErrInvalidCredentials = errors.New("models: invalid credentials")
+
+var ErrDuplicateEmail = errors.New("models: duplidate email")
+
+// var FieldErrors = make(map[string]string)

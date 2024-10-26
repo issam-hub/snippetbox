@@ -1,8 +1,10 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"net/http"
+	"snippetbox/interal/models"
 )
 
 func SecureHeaders(next http.Handler) http.Handler {
@@ -36,6 +38,26 @@ func (app *application) RecoverPanics(next http.Handler) http.Handler {
 				app.serverError(w, fmt.Errorf("%s", err))
 			}
 		}()
+
+		next.ServeHTTP(w, req)
+	})
+}
+
+func (app *application) AuthPassage(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
+		ctx := context.WithValue(req.Context(), models.ContextClass, app.isAuthenticated(req))
+		next.ServeHTTP(w, req.WithContext(ctx))
+	})
+}
+
+func (app *application) RequireAuth(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
+		if !app.isAuthenticated(req) {
+			http.Redirect(w, req, "/login", http.StatusSeeOther)
+			return
+		}
+
+		w.Header().Add("Cache-Control", "no-store")
 
 		next.ServeHTTP(w, req)
 	})
