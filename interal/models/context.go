@@ -21,4 +21,8 @@ func (ct *CrossTemplates) GetCSRFToken() string {
 
 type contextKey string
 
-var ContextClass = contextKey("isAuth")
+var ContextClass = contextKey("templateData")
+
+type isAuthKey string
+
+var IsAuthenticatedContextKey = contextKey("isAuth")

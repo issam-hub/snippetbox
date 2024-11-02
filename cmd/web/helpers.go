@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"runtime/debug"
+	"snippetbox/interal/models"
 )
 
 func (app *application) serverError(w http.ResponseWriter, err error) {
@@ -22,5 +23,11 @@ func (app *application) notFound(w http.ResponseWriter) {
 }
 
 func (app *application) isAuthenticated(r *http.Request) bool {
-	return app.sessionManager.Exists(r.Context(), "authenticatedUserID")
+	isAuth, ok := r.Context().Value(models.IsAuthenticatedContextKey).(bool)
+
+	if !ok {
+		return false
+	}
+
+	return isAuth
 }
