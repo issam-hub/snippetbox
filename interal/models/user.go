@@ -74,7 +74,3 @@ func (m *UserModel) Authenticate(email, password string) (int, error) {
 func (m *UserModel) Exists(id int) (bool, error) {
 	return false, nil
 }
-
-type contextKey string
-
-var ContextClass = contextKey("isAuth")

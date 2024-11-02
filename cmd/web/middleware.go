@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"net/http"
 	"snippetbox/interal/models"
+
+	"github.com/justinas/nosurf"
 )
 
 func SecureHeaders(next http.Handler) http.Handler {
@@ -43,9 +45,13 @@ func (app *application) RecoverPanics(next http.Handler) http.Handler {
 	})
 }
 
-func (app *application) AuthPassage(next http.Handler) http.Handler {
+func (app *application) AddTemplateData(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
-		ctx := context.WithValue(req.Context(), models.ContextClass, app.isAuthenticated(req))
+		crosstemplates := &models.CrossTemplates{
+			IsAuthenticated: app.isAuthenticated(req),
+			CSRFToken:       nosurf.Token(req),
+		}
+		ctx := context.WithValue(req.Context(), models.ContextClass, crosstemplates)
 		next.ServeHTTP(w, req.WithContext(ctx))
 	})
 }
@@ -61,4 +67,15 @@ func (app *application) RequireAuth(next http.Handler) http.Handler {
 
 		next.ServeHTTP(w, req)
 	})
+}
+
+func (app *application) noSurf(next http.Handler) http.Handler {
+	csrfHandler := nosurf.New(next)
+	csrfHandler.SetBaseCookie(http.Cookie{
+		HttpOnly: true,
+		Path:     "/",
+		// Secure:   true,
+	})
+
+	return csrfHandler
 }

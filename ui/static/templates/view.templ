@@ -7,9 +7,6 @@ import (
 var helloHandle = templ.NewOnceHandle()
 
 templ View(snippet models.Snippet, flash string){
-    @helloHandle.Once(){
-        <script src="/static/javascript/code.js" defer></script>
-    }
     @layout.Page("Snippet View") {
         if flash != "" {
             <h1 class="flesh absolute top-24 left-1/2 -translate-x-1/2 p-4 rounded-md bg-[#6ed795d0] text-green-700 flex items-center">snippet successfully created! <img src="/static/images/close.svg" alt="close" class="h-4 w-4 ml-4 cursor-pointer" ></h1>

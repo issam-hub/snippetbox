@@ -1,0 +1,19 @@
+<div class=\"container mx-auto px-3 my-5\"><h1 class=\"special_title font-bold text-3xl text-center\">Create a snippet</h1><form action=\"/snippet/create\" method=\"post\" class=\"mt-10 max-w-screen-lg mx-auto space-y-5\"><input type=\"hidden\" name=\"csrf_token\" value=\"
+\"><div class=\"flex flex-col\"><label for=\"\" class=\"mb-2 font-semibold\">Title:</label> <input type=\"text\" class=\"border border-slate-200 rounded-md p-3\" name=\"title\" value=\"
+\"> 
+<p class=\"text-sm text-red-500\">* 
+</p>
+</div><div class=\"flex flex-col\"><label for=\"\" class=\"mb-2 font-semibold\">Content:</label> <textarea name=\"content\" class=\"p-3 resize-none border border-slate-200 rounded-md h-56 [&amp;::-webkit-scrollbar]:w-2 [&amp;::-webkit-scrollbar-track]:bg-slate-200 [&amp;::-webkit-scrollbar-thumb]:bg-slate-300 [&amp;::-webkit-scrollbar-thumb]:rounded-lg\" name=\"\" id=\"\">
+</textarea> 
+<p class=\"text-sm text-red-500\">* 
+</p>
+</div><div class=\"flex\"><label for=\"\" class=\"mr-6 font-semibold\">Delete in:</label><div class=\"flex space-x-3\"><div><input type=\"radio\" name=\"expires\" id=\"\" value=\"365\"
+ checked
+> <label for=\"\" class=\"font-semibold\">One Year</label></div><div><input type=\"radio\" name=\"expires\" id=\"\" value=\"7\"
+ checked
+> <label for=\"\" class=\"font-semibold\">One Week</label></div><div><input type=\"radio\" name=\"expires\" id=\"\" value=\"1\"
+ checked
+> <label for=\"\" class=\"font-semibold\">One Day</label></div></div>
+<p class=\"text-sm text-red-500\">* 
+</p>
+</div><input type=\"submit\" value=\"Publish\" class=\"py-3 px-4 bg-cyan-300 rounded-md text-white font-semibold cursor-pointer\"></form></div>

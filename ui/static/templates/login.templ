@@ -3,6 +3,7 @@ package templates
 import (
     layout "snippetbox/ui/static/templates/layout"
     "snippetbox/interal/forms"
+	"snippetbox/interal/models"
 )
 
 templ Login(form forms.UserLoginForm){
@@ -10,6 +11,7 @@ templ Login(form forms.UserLoginForm){
         <div class="container mx-auto px-3 my-5">
             <h1 class="special_title font-bold text-3xl text-center">Login to your account</h1>
             <form action="/login" method="post" class="mt-10 max-w-screen-lg mx-auto space-y-5">
+                <input type="hidden" name="csrf_token" value={ctx.Value(models.ContextClass).(models.TemplateData).GetCSRFToken()}>
                 <ul class="[&_li]:list-disc ml-4">
                     for _, error := range form.NonFieldErrors {
                         <li class="text-sm text-red-500">{error}</li>

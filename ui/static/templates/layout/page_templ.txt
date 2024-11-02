@@ -1,0 +1,7 @@
+<!doctype html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>
+ - Snippetbox</title><link rel=\"stylesheet\" href=\"/static/css/output.css\"><link rel=\"preconnect\" href=\"https://fonts.googleapis.com\"><link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin><link href=\"https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&amp;display=swap\" rel=\"stylesheet\"><link rel=\"preconnect\" href=\"https://fonts.googleapis.com\"><link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin><link href=\"https://fonts.googleapis.com/css2?family=Fredoka:wght@600&amp;display=swap\" rel=\"stylesheet\"></head><body><header class=\"py-5 bg-cyan-100\"><div class=\"container mx-auto px-3 flex justify-between items-center\"><h1 class=\"special_title text-5xl\"><a href=\"/\">Snippetbox</a></h1><nav class=\"flex justify-between items-center w-[400px]\"><a href=\"/\" class=\"special_title text-yellow-500\">Home</a> 
+<a href=\"/snippet/create\" class=\"special_title text-yellow-500\">Create</a><form action=\"/logout\" method=\"post\" class=\"contents\"><input type=\"hidden\" name=\"csrf_token\" value=\"
+\"><button class=\"special_title text-yellow-500\">Logout</button></form>
+<a href=\"/signup\" class=\"special_title text-yellow-500\">Signup</a> <a href=\"/login\" class=\"special_title text-yellow-500\">Login</a>
+</nav></div></header>
+</body></html>
