@@ -1,0 +1,13 @@
+<div class=\"container mx-auto px-3 my-5\"><h1 class=\"special_title font-bold text-3xl text-center\">Create an account</h1><form action=\"/signup\" method=\"post\" class=\"mt-10 max-w-screen-lg mx-auto space-y-5\"><input type=\"hidden\" name=\"csrf_token\" value=\"
+\"><div class=\"flex flex-col\"><label for=\"\" class=\"mb-2 font-semibold\">Name:</label> <input type=\"text\" class=\"border border-slate-200 rounded-md p-3\" name=\"name\" value=\"
+\"> 
+<p class=\"text-sm text-red-500\">* 
+</p>
+</div><div class=\"flex flex-col\"><label for=\"\" class=\"mb-2 font-semibold\">Email:</label> <input type=\"email\" class=\"border border-slate-200 rounded-md p-3\" name=\"email\" value=\"
+\"> 
+<p class=\"text-sm text-red-500\">* 
+</p>
+</div><div class=\"flex flex-col\"><label for=\"\" class=\"mb-2 font-semibold\">Password:</label> <input type=\"password\" class=\"border border-slate-200 rounded-md p-3\" name=\"password\"> 
+<p class=\"text-sm text-red-500\">* 
+</p>
+</div><input type=\"submit\" value=\"Sign up\" class=\"py-3 px-4 bg-cyan-300 rounded-md text-white font-semibold cursor-pointer\"></form></div>

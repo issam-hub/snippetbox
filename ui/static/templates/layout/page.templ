@@ -25,9 +25,9 @@ templ Page(name string) {
                 <h1 class="special_title text-5xl"><a href="/">Snippetbox</a></h1>
                 <nav class="flex justify-between items-center w-[400px]">
                     <a href="/" class="special_title text-yellow-500">Home</a>
-                    if ctx.Value(models.ContextClass).(bool) {
+                    if td := ctx.Value(models.ContextClass).(models.TemplateData); td.IsAuth() {
                         <a href="/snippet/create" class="special_title text-yellow-500">Create</a>
-                        <form action="/logout" method="post" class="contents"><button class="special_title text-yellow-500">Logout</button></form>
+                        <form action="/logout" method="post" class="contents">                <input type="hidden" name="csrf_token" value={ctx.Value(models.ContextClass).(models.TemplateData).GetCSRFToken()}><button class="special_title text-yellow-500">Logout</button></form>
                     } else {
                         <a href="/signup" class="special_title text-yellow-500">Signup</a>
                         <a href="/login" class="special_title text-yellow-500">Login</a>
